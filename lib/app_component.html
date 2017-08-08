@@ -1,0 +1,81 @@
+<h1>Grade Report</h1>
+<div id="rubric" *ngIf="status==0">
+    <h3>Edit Rubric</h3>
+    <div>
+        <material-input id="rubric_content"
+                        label="Content?"
+                        autoFocus floatingLabel style="width:80%"
+                        [(ngModel)]="rubric_content"
+                        (keyup.enter)="focusOnPoint()">
+        </material-input>
+        <material-input id="rubric_point"
+                        label="Point?"
+                        floatingLabel style="width:80%"
+                        [(ngModel)]="rubric_point"
+                        (keyup.enter)="add()">
+        </material-input>
+        <material-fab mini raised
+                      (trigger)="add()"
+                      [disabled]="rubric_content.isEmpty || rubric_point.isEmpty">
+            <glyph icon="add"></glyph>
+        </material-fab>
+    </div>
+
+    <p *ngIf="rubric_list.isEmpty">
+        Empty Rubric
+    </p>
+
+    <div *ngIf="rubric_list.isNotEmpty">
+        <table>
+            <tr>
+                <th>Content</th>
+                <th>Points</th>
+            </tr>
+            <tr *ngFor="let content of rubric_list; let i = index">
+                <td>{{content.content}}</td>
+                <td>{{content.point}}</td>
+                <material-fab mini (trigger)="remove(i)">
+                    <glyph icon="delete"></glyph>
+                </material-fab>
+            </tr>
+        </table>
+        <h5>Total Points: {{total_points}}</h5>
+    </div>
+    <material-button raised
+                     (trigger)="complete()">
+        Complete
+    </material-button>
+
+    <material-button raised
+                     (trigger)="rubric_reset()">
+        Reset
+    </material-button>
+
+</div>
+<div id="reporter" *ngIf="status==1">
+    <h3>Report Generator</h3>
+    <ul>
+        <li *ngFor="let content of rubric_list">
+            <material-checkbox #done materialTooltip="Deduct" [(checked)]="content.selected">
+
+            </material-checkbox>
+            <span [class.done]="done.checked">{{content.content}} {{content.point}}pts</span>
+        </li>
+    </ul>
+    <material-button raised
+                     (trigger)="output()">
+        Output
+    </material-button>
+
+    <material-button raised
+                     (trigger)="report_reset()">
+        Reset
+    </material-button>
+    <material-button raised
+                     (trigger)="status=0">
+        Edit Rubric
+    </material-button> <br><br>
+    <textarea id="report" rows="10" cols="50"></textarea>
+</div>
+
+

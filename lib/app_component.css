@@ -1,0 +1,36 @@
+:host {
+    /* This is equivalent of the 'body' selector of a page. */
+}
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+li {
+    line-height: 3em;
+}
+
+li:hover {
+    background-color: #EEEEEE;
+}
+
+li material-checkbox {
+    vertical-align: middle;
+}
+
+li material-fab {
+    float: right;
+    vertical-align: middle;
+}
+
+.done {
+    text-decoration: line-through;
+}
+
+td, th {
+    min-width: 100px;
+}
+
+.half_screen{
+    with:50%;
+}
