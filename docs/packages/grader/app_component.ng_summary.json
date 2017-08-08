@@ -1,0 +1,88 @@
+{
+  "ngDeps": {
+    "1": "",
+    "3": [
+      {
+        "1": "package:angular2/angular2.dart",
+        "5": false
+      },
+      {
+        "1": "package:angular_components/angular_components.dart",
+        "5": false
+      },
+      {
+        "1": "dart:html",
+        "5": false
+      }
+    ],
+    "5": [
+      {
+        "1": "AppComponent",
+        "7": [
+          {
+            "2": "materialDirectives"
+          },
+          {
+            "2": "CORE_DIRECTIVES"
+          }
+        ]
+      }
+    ],
+    "6": "app_component.dart"
+  },
+  "type": {
+    "AppComponent": {
+      "class": "Directive",
+      "isComponent": true,
+      "selector": "my-app",
+      "exportAs": null,
+      "type": {
+        "class": "Type",
+        "name": "AppComponent",
+        "moduleUrl": "asset:grader/lib/app_component.dart",
+        "prefix": null,
+        "isHost": false,
+        "value": null,
+        "diDeps": []
+      },
+      "changeDetection": 6,
+      "inputs": {},
+      "inputTypes": {},
+      "outputs": {},
+      "hostListeners": {},
+      "hostProperties": {},
+      "hostAttributes": {},
+      "lifecycleHooks": [],
+      "template": {
+        "encapsulation": 0,
+        "template": "<h1>Grade Report</h1>\n<div id=\"rubric\" *ngIf=\"status==0\">\n    <h3>Edit Rubric</h3>\n    <div>\n        <material-input id=\"rubric_content\"\n                        label=\"Content?\"\n                        autoFocus floatingLabel style=\"width:80%\"\n                        [(ngModel)]=\"rubric_content\"\n                        (keyup.enter)=\"focusOnPoint()\">\n        </material-input>\n        <material-input id=\"rubric_point\"\n                        label=\"Point?\"\n                        floatingLabel style=\"width:80%\"\n                        [(ngModel)]=\"rubric_point\"\n                        (keyup.enter)=\"add()\">\n        </material-input>\n        <material-fab mini raised\n                      (trigger)=\"add()\"\n                      [disabled]=\"rubric_content.isEmpty || rubric_point.isEmpty\">\n            <glyph icon=\"add\"></glyph>\n        </material-fab>\n    </div>\n\n    <p *ngIf=\"rubric_list.isEmpty\">\n        Empty Rubric\n    </p>\n\n    <div *ngIf=\"rubric_list.isNotEmpty\">\n        <table>\n            <tr>\n                <th>Content</th>\n                <th>Points</th>\n            </tr>\n            <tr *ngFor=\"let content of rubric_list; let i = index\">\n                <td>{{content.content}}</td>\n                <td>{{content.point}}</td>\n                <material-fab mini (trigger)=\"remove(i)\">\n                    <glyph icon=\"delete\"></glyph>\n                </material-fab>\n            </tr>\n        </table>\n        <h5>Total Points: {{total_points}}</h5>\n    </div>\n    <material-button raised\n                     (trigger)=\"complete()\">\n        Complete\n    </material-button>\n\n    <material-button raised\n                     (trigger)=\"rubric_reset()\">\n        Reset\n    </material-button>\n\n</div>\n<div id=\"reporter\" *ngIf=\"status==1\">\n    <h3>Report Generator</h3>\n    <ul>\n        <li *ngFor=\"let content of rubric_list\">\n            <material-checkbox #done materialTooltip=\"Deduct\" [(checked)]=\"content.selected\">\n\n            </material-checkbox>\n            <span [class.done]=\"done.checked\">{{content.content}} {{content.point}}pts</span>\n        </li>\n    </ul>\n    <material-button raised\n                     (trigger)=\"output()\">\n        Output\n    </material-button>\n\n    <material-button raised\n                     (trigger)=\"report_reset()\">\n        Reset\n    </material-button>\n    <material-button raised\n                     (trigger)=\"status=0\">\n        Edit Rubric\n    </material-button> <br><br>\n    <textarea id=\"report\" rows=\"10\" cols=\"50\"></textarea>\n</div>\n\n\n",
+        "templateUrl": "asset:grader/lib/app_component.html",
+        "styles": [],
+        "styleUrls": [
+          "asset:grader/lib/app_component.css"
+        ],
+        "ngContentSelectors": []
+      },
+      "providers": [
+        {
+          "class": "Identifier",
+          "name": "materialProviders",
+          "moduleUrl": null,
+          "prefix": null,
+          "value": null
+        }
+      ],
+      "viewProviders": [],
+      "queries": [],
+      "viewQueries": []
+    },
+    "RubricContent": {
+      "class": "Identifier",
+      "name": "RubricContent",
+      "moduleUrl": "asset:grader/lib/app_component.dart",
+      "prefix": null,
+      "value": null
+    }
+  },
+  "alias": {}
+}
